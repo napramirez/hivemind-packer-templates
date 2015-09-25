@@ -45,8 +45,6 @@
       "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
       "shutdown_command": "{{user `shutdown_command`}}",
 
-      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
-      "virtualbox_version_file": ".vbox_version",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `memory_in_mb`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "{{user `cpu_cores`}}" ]
@@ -95,6 +93,12 @@
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/setup.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/install-guestadditions.sh",
+      "only": ["virtualbox-iso"]
     },
     {
       "type": "shell",
