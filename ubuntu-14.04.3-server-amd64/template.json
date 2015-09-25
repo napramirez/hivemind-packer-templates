@@ -105,7 +105,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "builds/ubuntu-14.04.3-server-amd64-{{.Provider}}.box"
+      "output": "../builds/ubuntu-14.04.3-server-amd64-{{.Provider}}.box"
     }
   ]
 }
