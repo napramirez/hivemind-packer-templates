@@ -121,7 +121,7 @@
       "artifact": "napramirez/ubuntu-14.04.3-server-amd64",
       "artifact_type": "vagrant.box",
       "metadata": {
-        "provisioners": "virtualbox,vmware"
+        "provider": "{{.Provider}}"
       }
     }
   ]
