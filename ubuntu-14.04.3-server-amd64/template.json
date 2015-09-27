@@ -115,6 +115,14 @@
     {
       "type": "vagrant",
       "output": "builds/ubuntu-14.04.3-server-amd64-{{.Provider}}.box"
+    },
+    {
+      "type": "atlas",
+      "artifact": "napramirez/ubuntu-14.04.3-server-amd64",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provisioners": ["virtualbox", "vmware"]
+      }
     }
   ]
 }
