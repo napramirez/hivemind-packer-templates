@@ -114,11 +114,11 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "builds/ubuntu-14.04.3-server-amd64-{{.Provider}}.box"
+      "output": "builds/ubuntu-14.04-server-amd64-{{.Provider}}.box"
     },
     {
       "type": "atlas",
-      "artifact": "napramirez/ubuntu-14.04.3-server-amd64",
+      "artifact": "napramirez/ubuntu-14.04-server-amd64",
       "artifact_type": "vagrant.box",
       "metadata": {
         "provider": "{{.Provider}}"
