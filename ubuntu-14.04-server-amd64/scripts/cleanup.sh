@@ -4,6 +4,7 @@
 #rm -f /home/vagrant/*.sh
 
 # Clear the package cache
+apt-get autoremove
 apt-get clean
 
 # Zero out the rest of the free space using dd, then delete the written file.
