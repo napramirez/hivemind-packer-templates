@@ -49,43 +49,6 @@
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `memory_in_mb`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "{{user `cpu_cores`}}" ]
       ]
-    },
-    {
-      "type": "vmware-iso",
-      "guest_os_type": "ubuntu-64",
-
-      "boot_command": [
-        "<esc><wait>",
-        "<esc><wait>",
-        "<enter><wait>",
-        "/install/vmlinuz",
-        " auto=true",
-        " priority=critical",
-        " initrd=/install/initrd.gz",
-        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
-        " -- ",
-        "<enter>"
-      ],
-      "boot_wait": "{{user `boot_wait`}}",
-      "disk_size": "{{user `disk_size`}}",
-      "headless": "{{user `headless`}}",
-      "iso_urls": "{{user `iso_url`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
-      "iso_checksum": "{{user `iso_checksum`}}",
-      "http_directory": "{{user `http_directory`}}",
-      "vm_name": "{{user `vm_name`}}",
-      "ssh_username": "{{user `ssh_username`}}",
-      "ssh_password": "{{user `ssh_password`}}",
-      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
-      "shutdown_command": "{{user `shutdown_command`}}",
-
-      "output_directory": "packer-ubuntu-14.04-amd64-vmware",
-      "tools_upload_flavor": "linux",
-      "vmx_data": {
-        "cpuid.coresPerSocket": "1",
-        "memsize": "{{user `memory_in_mb`}}",
-        "numvcpus": "{{user `cpu_cores`}}"
-      }
     }
   ],
   "provisioners": [
@@ -119,14 +82,14 @@
   "post-processors": [
     [{
       "type": "vagrant",
-      "output": "builds/ubuntu-14.04-server-amd64-{{.Provider}}.box"
+      "output": "builds/ubuntu-14.04-server-amd64-virtualbox.box"
     },
     {
       "type": "atlas",
       "artifact": "napramirez/ubuntu-14.04-server-amd64",
       "artifact_type": "vagrant.box",
       "metadata": {
-        "provider": "{{.Provider}}",
+        "provider": "virtualbox",
         "version": "1.1.1"
       }
     }]
