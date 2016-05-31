@@ -1,7 +1,7 @@
 {
   "variables": {
-    "iso_url": "http://mirror.nus.edu.sg/centos/6.8/isos/x86_64/CentOS-6.8-x86_64-LiveDVD.iso",
-    "iso_checksum": "b27e5eef3008fcd7069ac72d113e85d2",
+    "iso_url": "http://mirrors.usc.edu/pub/linux/distributions/centos/6.8/isos/x86_64/CentOS-6.8-x86_64-minimal.iso",
+    "iso_checksum": "0ca12fe5f28c2ceed4f4084b41ff8a0b",
     "iso_checksum_type": "md5",
     "shutdown_command": "echo '/sbin/halt -h -p' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'",
     "boot_wait": "10s",
