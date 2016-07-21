@@ -1,0 +1,80 @@
+{
+  "variables": {
+    "iso_url": "../iso/CentOS-7-x86_64-Minimal-1511.iso",
+    "iso_checksum": "88c0437f0a14c6e2c94426df9d43cd67",
+    "iso_checksum_type": "md5",
+    "shutdown_command": "echo '/sbin/halt -h -p' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'",
+    "boot_wait": "10s",
+    "disk_size": "81920",
+    "headless": "true",
+    "http_directory": "http",
+    "vm_name": "packer-CentOS-7-x86_64",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_wait_timeout": "10000s",
+    "memory_in_mb": "512",
+    "cpu_cores": "2"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "RedHat_64",
+
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+
+      "boot_wait": "{{user `boot_wait`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "headless": "{{user `headless`}}",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "http_directory": "{{user `http_directory`}}",
+      "vm_name": "{{user `vm_name`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "{{user `shutdown_command`}}",
+
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `memory_in_mb`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `cpu_cores`}}" ]
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/setup.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/install-guestadditions.sh",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/install-vagrant-ssh-pubkey.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/install-ansible-node-deps.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ],
+  "post-processors": [
+    [{
+      "type": "vagrant",
+      "output": "builds/CentOS-7-x86_64-virtualbox.box"
+    }]
+  ]
+}
