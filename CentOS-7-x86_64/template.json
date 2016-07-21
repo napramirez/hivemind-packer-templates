@@ -70,6 +70,15 @@
     [{
       "type": "vagrant",
       "output": "builds/CentOS-7-x86_64-virtualbox.box"
+    },
+    {
+      "type": "atlas",
+      "artifact": "napramirez/CentOS-7-x86_64",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "virtualbox",
+        "version": "1.0.0"
+      }
     }]
   ]
 }
