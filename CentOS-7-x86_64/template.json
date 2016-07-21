@@ -1,6 +1,6 @@
 {
   "variables": {
-    "iso_url": "../iso/CentOS-7-x86_64-Minimal-1511.iso",
+    "iso_url": "http://mirrors.usc.edu/pub/linux/distributions/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso",
     "iso_checksum": "88c0437f0a14c6e2c94426df9d43cd67",
     "iso_checksum_type": "md5",
     "shutdown_command": "echo '/sbin/halt -h -p' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'",
